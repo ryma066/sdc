@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Alerte</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-size: 5rem;
+            text-align: center;
+        }
+
+        /* Message d'alerte rouge avec clignotement */
+        #message {
+            color: red;
+            display: block;
+            animation: blink 0.5s step-start infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* Effet glitch avant l'écran noir */
+        .glitch {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://media.giphy.com/media/oEI9uBYSzLpBK/giphy.gif') center center;
+            background-size: cover;
+            display: none;
+        }
+
+        /* L'écran noir */
+        #blackout {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+        }
+
+        /* Message final (blague) */
+        #jokeMessage {
+            display: none;
+            font-size: 3rem;
+        }
+
+        /* Personnage qui fait un bisou */
+        #kissCharacter {
+            display: none;
+            width: 400px;
+            height: auto;
+        }
+
+        /* Message final "Do you even shave?" */
+        #finalMessage {
+            display: none;
+            font-size: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Son de la sirène -->
+    <audio id="sirenSound" src="https://www.soundjay.com/misc/sounds/buzzer-01.mp3"></audio>
+
+    <div id="message">VOUS AVEZ ÉTÉ PIRATÉ</div>
+    <div class="glitch" id="glitch"></div>
+    <div id="blackout"></div>
+    <div id="jokeMessage">C'est une blague, mama u a hoe</div>
+
+    <!-- Ajout du personnage qui fait un bisou -->
+    <img id="kissCharacter" src="https://media.giphy.com/media/3o6ZtpxSZbQRRnwCKQ/giphy.gif" alt="Personnage qui fait un bisou">
+
+    <div id="finalMessage">Do you even shave?</div>
+
+    <script>
+        // Joue le son de la sirène
+        function playSiren() {
+            var siren = document.getElementById("sirenSound");
+            siren.play();
+        }
+
+        // Démarre les événements
+        setTimeout(function() {
+            playSiren();  // Joue la sirène
+            document.getElementById("message").style.display = "none";  // Cache le message
+            document.getElementById("glitch").style.display = "block";  // Affiche l'effet glitch
+        }, 3000); // Temps avant l'effet glitch (3 secondes)
+
+        // Affiche l'écran noir après 1 seconde de glitch
+        setTimeout(function() {
+            document.getElementById("glitch").style.display = "none";  // Cache l'effet glitch
+            document.getElementById("blackout").style.display = "block";  // Affiche l'écran noir
+        }, 4000); // Durée de l'effet glitch (1 seconde)
+
+        // Affiche le message final après 3 secondes d'écran noir
+        setTimeout(function() {
+            document.getElementById("blackout").style.display = "none";  // Cache l'écran noir
+            document.getElementById("jokeMessage").style.display = "block";  // Affiche le message de la blague
+        }, 7000); // Temps total (3 secondes d'écran noir)
+
+        // Affiche le personnage qui fait un bisou après 2 secondes du message de la blague
+        setTimeout(function() {
+            document.getElementById("jokeMessage").style.display = "none";  // Cache le message de la blague
+            document.getElementById("kissCharacter").style.display = "block";  // Affiche le personnage qui fait un bisou
+        }, 9000); // Temps total (après 2 secondes de la blague)
+
+        // Affiche l'écran noir puis "Do you even shave?" après 3 secondes du bisou
+        setTimeout(function() {
+            document.getElementById("kissCharacter").style.display = "none";  // Cache le personnage qui fait un bisou
+            document.getElementById("blackout").style.display = "block";  // Affiche l'écran noir à nouveau
+        }, 12000); // Temps total (après 3 secondes du bisou)
+
+        // Affiche le dernier message "Do you even shave?"
+        setTimeout(function() {
+            document.getElementById("blackout").style.display = "none";  // Cache l'écran noir
+            document.getElementById("finalMessage").style.display = "block";  // Affiche le message "Do you even shave?"
+        }, 15000); // Temps total (après 3 secondes d'écran noir)
+    </script>
+
+</body>
+</html>
